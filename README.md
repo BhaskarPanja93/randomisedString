@@ -1,4 +1,4 @@
-# randomisedString v1.2.0
+# randomisedString v1.3.0
 
 ```pip install randomisedString --upgrade```
 
