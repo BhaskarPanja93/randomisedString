@@ -1,4 +1,4 @@
-__version__ = "1.3.1"
+__version__ = "1.3.2"
 __packagename__ = "randomisedstring"
 
 
@@ -72,7 +72,7 @@ class Generator:
             _maxLength += 1
         string = ''
         for _ in range(self.__randrange(_minLength, _maxLength)):
-            string += chr(self.__choice(self.LOWER_CASE_ASCIIS+self.UPPER_CASE_ASCIIS))
+            string += chr(self.__choice(self.NUMBER_ASCIIS))
         return string
 
 
