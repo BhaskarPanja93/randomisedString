@@ -1,4 +1,4 @@
-# randomisedString v1.3.2
+# randomisedString v1.3.3
 
 ```pip install randomisedString --upgrade```
 
@@ -24,13 +24,13 @@ generator = StringGenerator()
 print(generator.AlphaNumeric(10, 10))
 >> 45HCMJ4SCy
 print(generator.OnlyNumeric(10, 10))
->> cmkntCBmdp
+>> 1127163
 print(generator.OnlyAlpha(10, 10))
 >> UjfQZDDOOq
 print(generator.AlphaNumeric(5, 10))
 >> FxgirdEYB
 print(generator.OnlyNumeric(5, 10))
->> XYfzAT
+>> 917478
 print(generator.OnlyAlpha(5, 10))
 >> HqGiHqt
 ```

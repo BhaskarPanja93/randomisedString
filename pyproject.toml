@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "randomisedString"
-version = "1.3.2"
+version = "1.3.3"
 description = "A well maintained program to generate randomised strings. Can be used for assigning unique IDs of any specified size. Can be alpha only or numeric or alphanumeric as specified."
 readme = "README.md"
 maintainers = [{ name = "Bhindi", email = "bhaskarpanja93@gmail.com" }]
