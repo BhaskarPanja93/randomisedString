@@ -1,4 +1,4 @@
-__version__ = "1.3.3"
+__version__ = "1.4.0"
 __packagename__ = "randomisedstring"
 
 
@@ -15,8 +15,17 @@ def updatePackage():
         latest = data['info']['version']
         if latest != __version__:
             try:
-                import pip
-                pip.main(["install", __packagename__, "--upgrade"])
+                import subprocess
+                from pip._internal.utils.entrypoints import (
+                    get_best_invocation_for_this_pip,
+                    get_best_invocation_for_this_python,
+                )
+                from pip._internal.utils.compat import WINDOWS
+                if WINDOWS:
+                    pip_cmd = f"{get_best_invocation_for_this_python()} -m pip"
+                else:
+                    pip_cmd = get_best_invocation_for_this_pip()
+                subprocess.run(f"{pip_cmd} install {__packagename__} --upgrade")
                 print(f"\nUpdated package {__packagename__} v{__version__} to v{latest}\nPlease restart the program for changes to take effect")
                 sleep(3)
             except:
@@ -28,21 +37,21 @@ def updatePackage():
         print(f"Ignoring version check for {__packagename__} (Failed)")
 
 
-class Generator:
+class Imports:
+    from secrets import choice, randbelow
+
+
+class RandomisedString:
     def __init__(self):
         """
         Initialise the Generator and use the public functions to generate a randomised string.
         """
-        from random import choice as __choice, randrange as __randrange
-        self.__choice = __choice
-        self.__randrange = __randrange
         self.LOWER_CASE_ASCIIS = list(range(97, 122 + 1))
         self.UPPER_CASE_ASCIIS = list(range(65, 90 + 1))
         self.NUMBER_ASCIIS = list(range(48, 57 + 1))
         self.ALPHANUMERIC_ASCIIS = self.LOWER_CASE_ASCIIS + self.UPPER_CASE_ASCIIS + self.NUMBER_ASCIIS
 
-
-    def AlphaNumeric(self, _min=10, _max=20)->str:
+    def AlphaNumeric(self, _min=10, _max=20) -> str:
         """
         Generates a string with numbers and alphabets(a-z, A-Z, 0-9)
         :param _min: Minimum possible length of generated string
@@ -52,14 +61,12 @@ class Generator:
         _minLength = min(_min, _max)
         _maxLength = max(_min, _max)
         if _maxLength == _minLength:
-            _maxLength+=1
-        string = ''
-        for _ in range(self.__randrange(_minLength, _maxLength)):
-            string += chr(self.__choice(self.ALPHANUMERIC_ASCIIS))
+            _maxLength += 1
+        length = Imports.randbelow(_maxLength - _minLength) + _minLength
+        string = ''.join(chr(Imports.choice(self.ALPHANUMERIC_ASCIIS)) for _ in range(length))
         return string
 
-
-    def OnlyNumeric(self, _min=10, _max=20)->str:
+    def OnlyNumeric(self, _min=10, _max=20) -> str:
         """
         Generates a string with only numbers(0-9). Convert the string to int if needed
         :param _min: Minimum possible length of generated string
@@ -70,13 +77,11 @@ class Generator:
         _maxLength = max(_min, _max)
         if _maxLength == _minLength:
             _maxLength += 1
-        string = ''
-        for _ in range(self.__randrange(_minLength, _maxLength)):
-            string += chr(self.__choice(self.NUMBER_ASCIIS))
+        length = Imports.randbelow(_maxLength - _minLength) + _minLength
+        string = ''.join(chr(Imports.choice(self.NUMBER_ASCIIS)) for _ in range(length))
         return string
 
-
-    def OnlyAlpha(self, _min=10, _max=20)->str:
+    def OnlyAlpha(self, _min=10, _max=20) -> str:
         """
         Generates a string with only Alphabets(a-z, A-Z)
         :param _min: Minimum possible length of generated string
@@ -85,10 +90,7 @@ class Generator:
         """
         _minLength = min(_min, _max)
         _maxLength = max(_min, _max)
-        if _maxLength == _minLength:
-            _maxLength += 1
-        string = ''
-        for _ in range(self.__randrange(_minLength, _maxLength)):
-            string += chr(self.__choice(self.LOWER_CASE_ASCIIS+self.UPPER_CASE_ASCIIS))
+        if _maxLength == _minLength: _maxLength += 1
+        length = Imports.randbelow(_maxLength - _minLength) + _minLength
+        string = ''.join(chr(Imports.choice(self.LOWER_CASE_ASCIIS + self.UPPER_CASE_ASCIIS)) for _ in range(length))
         return string
-

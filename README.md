@@ -1,9 +1,9 @@
-# randomisedString v1.3.3
+# randomisedString v1.4.0
 
 ```pip install randomisedString --upgrade```
 
 
-###### <br>A well maintained program to generate randomised strings. Can be used for assigning unique IDs of any specified size. Can be alpha only or numeric or alphanumeric as specified.
+###### <br>A well maintained program to generate cryptographically safe randomised strings. Can be used for assigning unique IDs of any specified size. Can be alpha only or numeric or alphanumeric as specified.
 
 
 <br>To install: 
