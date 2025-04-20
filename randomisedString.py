@@ -1,4 +1,4 @@
-__version__ = "1.4.0"
+__version__ = "1.4.1"
 __packagename__ = "randomisedstring"
 
 
@@ -42,9 +42,16 @@ class Imports:
 
 
 class RandomisedString:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super(RandomisedString, cls).__new__(cls)
+        return cls._instance
+
     def __init__(self):
         """
-        Initialise the Generator and use the public functions to generate a randomised string.
+        Initialize the Generator and use the public functions to generate a randomized string.
         """
         self.LOWER_CASE_ASCIIS = list(range(97, 122 + 1))
         self.UPPER_CASE_ASCIIS = list(range(65, 90 + 1))
